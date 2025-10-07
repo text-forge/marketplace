@@ -33,11 +33,17 @@ async function fetchPackages() {
   }
 }
 
-function renderCard(pkg, githubUrl, downloadUrl) {
+function renderCard(pkg, githubUrl, downloadUrl, fileName) {
   const card = document.createElement('div');
   card.className = 'card';
 
   const tags = pkg.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ');
+
+  // Determine button label based on file extension
+  let fileActionLabel = 'Download Package';
+  if (fileName && fileName.endsWith('.tres')) {
+    fileActionLabel = 'View Theme File';
+  }
 
   card.innerHTML = `
     <h2>${pkg.name}</h2>
@@ -47,10 +53,11 @@ function renderCard(pkg, githubUrl, downloadUrl) {
     <p><strong>Author:</strong> ${pkg.author}</p>
     <p><strong>Tags:</strong> ${tags}</p>
     <a href="${githubUrl}" target="_blank">View on GitHub</a>
-    ${downloadUrl ? `<a href="${downloadUrl}" target="_blank">Download Package</a>` : `<p><em>No downloadable file found</em></p>`}
+    ${downloadUrl && fileName ? `<a href="${downloadUrl}" target="_blank">${fileActionLabel}</a>` : `<p><em>No downloadable file found</em></p>`}
   `;
 
   container.appendChild(card);
 }
+
 
 fetchPackages();
