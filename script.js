@@ -1,22 +1,39 @@
-const rawUrl = 'https://raw.githubusercontent.com/text-forge/mp/main/packages.json';
+const baseRepo = 'text-forge/mp';
+const branch = 'main';
+const basePath = `https://raw.githubusercontent.com/${baseRepo}/${branch}/packages`;
 const container = document.getElementById('packages');
 
 async function fetchPackages() {
   try {
-    const res = await fetch(rawUrl);
+    const res = await fetch(`${basePath}/../packages.json`);
     const packages = await res.json();
 
-    packages.forEach(pkg => {
-      const githubUrl = `https://github.com/text-forge/mp/tree/main/packages/${pkg.id}`;
-      renderCard(pkg, githubUrl);
-    });
+    for (const pkg of packages) {
+      const packJsonUrl = `${basePath}/${pkg.id}/pack.json`;
+      let fileName = null;
+
+      try {
+        const packRes = await fetch(packJsonUrl);
+        const packData = await packRes.json();
+        fileName = packData.file;
+      } catch (err) {
+        console.warn(`Missing or invalid pack.json for ${pkg.id}`);
+      }
+
+      const githubUrl = `https://github.com/${baseRepo}/tree/${branch}/packages/${pkg.id}`;
+      const downloadUrl = fileName
+        ? `${basePath}/${pkg.id}/${fileName}`
+        : null;
+
+      renderCard(pkg, githubUrl, downloadUrl);
+    }
   } catch (error) {
     container.innerHTML = `<p>Failed to load packages. Please try again later.</p>`;
     console.error('Error loading packages:', error);
   }
 }
 
-function renderCard(pkg, url) {
+function renderCard(pkg, githubUrl, downloadUrl) {
   const card = document.createElement('div');
   card.className = 'card';
 
@@ -29,7 +46,8 @@ function renderCard(pkg, url) {
     <p><strong>Category:</strong> ${pkg.category}</p>
     <p><strong>Author:</strong> ${pkg.author}</p>
     <p><strong>Tags:</strong> ${tags}</p>
-    <a href="${url}" target="_blank">View on GitHub</a>
+    <a href="${githubUrl}" target="_blank">View on GitHub</a>
+    ${downloadUrl ? `<a href="${downloadUrl}" target="_blank">Download Package</a>` : `<p><em>No downloadable file found</em></p>`}
   `;
 
   container.appendChild(card);
