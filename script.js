@@ -25,7 +25,7 @@ async function fetchPackages() {
         ? `${basePath}/${pkg.id}/${fileName}`
         : null;
 
-      renderCard(pkg, githubUrl, downloadUrl);
+      renderCard(pkg, githubUrl, downloadUrl, fileName);
     }
   } catch (error) {
     container.innerHTML = `<p>Failed to load packages. Please try again later.</p>`;
