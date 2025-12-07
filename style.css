@@ -233,7 +233,7 @@ code {
 .main-content {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 24px 80px;
+  padding: 24px 24px 80px;
 }
 
 .packages-section {
