@@ -4,33 +4,173 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Text Forge Marketplace</title>
+  <meta name="description" content="Browse and download official packages, modes, themes, and extensions for Text Forge code editor" />
+  <link rel="icon" type="image/x-icon" href="attached_assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Text Forge Marketplace</h1>
-    <p>Browse and download official packages</p>
-    <p><a href="https://text-forge.github.io/docs">Text Forge Online Documentations</a></p>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="https://text-forge.github.io" class="nav-logo">
+        <img src="attached_assets/logo.png" alt="Text Forge Logo" class="logo-img" />
+        <span class="logo-text">Text <span class="logo-accent">Forge</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="https://text-forge.github.io#features">Features</a>
+        <a href="https://text-forge.github.io/screenshots">Screenshots</a>
+        <a href="https://text-forge.github.io/blog">Blog</a>
+        <a href="https://text-forge.github.io/docs">Docs</a>
+        <a href="#" class="active">Marketplace</a>
+        <a href="https://github.com/text-forge/text-forge" class="nav-github" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-container">
+      <span class="hero-badge">Extend Your Editor</span>
+      <h1>Marketplace</h1>
+      <p class="hero-tagline">Browse and download official packages</p>
+      <p class="hero-description">Discover modes, themes, and extensions to customize your Text Forge experience.</p>
+    </div>
   </header>
 
-  <main>
-    <div id="packages" class="grid"></div>
-    <section id="notes" class="notes">
+  <main class="main-content">
+    <section class="packages-section">
+      <div class="section-header">
+        <h2>Available Packages</h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="modes">Modes</button>
+          <button class="filter-btn" data-filter="themes">Themes</button>
+          <button class="filter-btn" data-filter="extensions">Extensions</button>
+        </div>
+      </div>
+      <div id="packages" class="packages-grid"></div>
+      <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading packages...</p>
+      </div>
+      <div id="error" class="error-message" style="display: none;">
+        <p>Failed to load packages. Please try again later.</p>
+      </div>
+    </section>
+
+    <section class="notes-section">
       <h2>Tips & Notes</h2>
-      <ul>
-        <li>You can <strong>right-click</strong> on any package link and choose <em>"Save link as…"</em> to download the file manually—especially useful for theme files like <code>.tres</code> that open in browser by default.</li>
-        <li>Packages labeled <strong>"View Theme File"</strong> are usually text-based and may open directly in your browser. Use "Save link as…" to store them locally.</li>
-        <li>Official packages are maintained by the Text Forge team. Community contributions are welcome via pull requests.</li>
-        <li>To install a theme manually, download the file and place it inside <code>Editor Data/themes/</code> directory. (You can find editor data directory with <strong>Settings > Open Data Folder</strong>)</li>
-        <li>To install a mode manually, download the file and import it with <strong>Settings > Mode Manager > Import Mode / Mode Kit</strong>.</li>
-        <li>To install an extension manually, download the file and install it with <strong>Settings > Extensions > Install Extension</strong>.</li>
-      </ul>
+      <div class="notes-grid">
+        <div class="note-card">
+          <div class="note-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </div>
+          <h3>Download Tips</h3>
+          <p>Right-click on any package link and choose "Save link as..." to download manually. Especially useful for theme files like <code>.tres</code> that open in browser by default.</p>
+        </div>
+        <div class="note-card">
+          <div class="note-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3>Official Packages</h3>
+          <p>Official packages are maintained by the Text Forge team. Community contributions are welcome via pull requests.</p>
+        </div>
+        <div class="note-card">
+          <div class="note-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </div>
+          <h3>Installing Themes</h3>
+          <p>Download the file and place it inside <code>Editor Data/themes/</code> directory. Find it via <strong>Settings &gt; Open Data Folder</strong>.</p>
+        </div>
+        <div class="note-card">
+          <div class="note-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <line x1="9" y1="15" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <h3>Installing Modes</h3>
+          <p>Download the file and import it with <strong>Settings &gt; Mode Manager &gt; Import Mode / Mode Kit</strong>.</p>
+        </div>
+        <div class="note-card">
+          <div class="note-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </div>
+          <h3>Installing Extensions</h3>
+          <p>Download the file and install it with <strong>Settings &gt; Extensions &gt; Install Extension</strong>.</p>
+        </div>
+        <div class="note-card">
+          <div class="note-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <h3>Documentation</h3>
+          <p>Visit the <a href="https://text-forge.github.io/docs" target="_blank">official documentation</a> for detailed guides and tutorials.</p>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>Built with ❤️ by the Text Forge community</p>
-    <p>See <a href="https://github.com/text-forge/marketplace">Text Forge Marketplace Interface</a> for source code</p>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="https://text-forge.github.io" class="footer-logo">
+          <img src="attached_assets/logo.png" alt="Text Forge Logo" class="logo-img" />
+          <span class="logo-text">Text <span class="logo-accent">Forge</span></span>
+        </a>
+        <p>A modular, extensible, language-agnostic text editor built with Godot 4.5.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <a href="https://text-forge.github.io/docs">Documentation</a>
+          <a href="https://github.com/text-forge/text-forge/releases">Download</a>
+          <a href="https://text-forge.github.io/blog">Blog</a>
+        </div>
+        <div class="footer-column">
+          <h4>Community</h4>
+          <a href="https://github.com/text-forge/text-forge/discussions">Discussions</a>
+          <a href="https://github.com/text-forge/mp">Contribute Packages</a>
+          <a href="https://github.com/text-forge/marketplace">Marketplace Source</a>
+        </div>
+        <div class="footer-column">
+          <h4>Project</h4>
+          <a href="https://github.com/text-forge/text-forge">GitHub</a>
+          <a href="https://github.com/text-forge/text-forge/blob/main/LICENSE">MIT License</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Open Source & MIT Licensed</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
